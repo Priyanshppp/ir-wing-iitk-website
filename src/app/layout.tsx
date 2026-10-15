@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s | IR Wing IITK",
   },
   description:
-    "Explore international opportunities, exchange roadmaps, guidance, and stories from the International Relations Wing at IIT Kanpur.",
+    "Discover international study, research, and internship opportunities with practical application guidance from IIT Kanpur's International Relations Wing.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
