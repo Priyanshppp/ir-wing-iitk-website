@@ -12,14 +12,14 @@ export default function Home() {
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow"><span className="eyebrow-dot" /> International Relations Wing · IIT Kanpur</p>
-          <h1 id="hero-title">Your next chapter<br /><span>has no borders.</span></h1>
-          <p className="hero-description">Find international opportunities, understand the process, and learn from students who have been there.</p>
+          <h1 id="hero-title">Your next move<br /><span>goes global.</span></h1>
+          <p className="hero-description">Discover international study, research and internship opportunities—and get practical guidance from IIT Kanpur students who have been there.</p>
           <div className="hero-actions">
             <Link className="button button-primary" href="/opportunities">Explore opportunities <span aria-hidden="true">↗</span></Link>
             <Link className="text-link" href="/roadmaps">See the application roadmap <span aria-hidden="true">→</span></Link>
           </div>
         </div>
-        <div className="world-card" aria-label="A graphic showing connections between IIT Kanpur and universities around the world">
+        <div className="world-card" role="img" aria-label="A map-inspired illustration connecting IIT Kanpur with the world">
           <div className="world-grid" />
           <svg className="route-lines" viewBox="0 0 600 420" role="img" aria-hidden="true">
             <path d="M62 276 C155 235 136 102 270 136 S407 267 520 102" />
@@ -29,7 +29,7 @@ export default function Home() {
           </svg>
           <div className="map-label map-label-home"><span className="map-dot" /> IIT Kanpur</div>
           <div className="map-label map-label-world"><span className="map-dot map-dot-bright" /> The world</div>
-          <div className="world-caption"><span>GO FURTHER</span><span>01 / 06</span></div>
+          <div className="world-caption"><span>GLOBAL OPPORTUNITIES</span><span>START AT IIT KANPUR</span></div>
         </div>
         <div className="hero-index"><span>01</span><span className="index-line" /><span>GLOBAL LEARNING, MADE CLEAR</span></div>
       </section>
@@ -41,7 +41,7 @@ export default function Home() {
       <section className="section shell" aria-labelledby="start-title">
         <div className="section-heading">
           <div><p className="eyebrow">A good place to begin</p><h2 id="start-title">Make your global move.</h2></div>
-          <p className="section-aside">Whether you are just exploring or ready to apply, start with the step that fits you.</p>
+          <p className="section-aside">Explore your options, plan your next steps, and find the official guidance you need to move forward.</p>
         </div>
         <div className="path-grid">
           {featuredLinks.map((item) => (
