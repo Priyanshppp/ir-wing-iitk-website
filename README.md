@@ -14,7 +14,7 @@ Website for the International Relations Wing at IIT Kanpur. The site will help s
 
 ## Local setup
 
-Install a current Node.js LTS release, then from the repository root run:
+Install Node.js 20.9 or newer (an active LTS release is recommended), then from the repository root run:
 
 ```bash
 npm install
