@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+export const metadata: Metadata = { title: "Roadmaps and guidelines" };
+const steps = [["Explore", "Choose a programme and check its current eligibility."], ["Prepare", "Collect documents, speak with your academic advisor, and plan your timeline."], ["Apply", "Follow the official application instructions and submit before the deadline."], ["Get ready", "Complete institute formalities, travel planning, and pre-departure steps."]];
+export default function RoadmapsPage() { return <section className="content-page shell"><p className="eyebrow">A clear path forward</p><h1>Roadmaps & guidelines.</h1><p className="lead">Understand the process before you begin. Programme-specific checklists and timelines will be added here.</p><div className="timeline">{steps.map(([title, text], i) => <article className="timeline-item" key={title}><span>0{i + 1}</span><div><h2>{title}</h2><p>{text}</p></div></article>)}</div><Link className="button button-primary" href="/opportunities">Browse opportunities <span>↗</span></Link></section>; }

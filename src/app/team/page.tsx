@@ -1,0 +1,3 @@
+import type { Metadata } from "next";
+export const metadata: Metadata = { title: "Meet the team" };
+export default function TeamPage() { return <section className="content-page shell"><p className="eyebrow">Students helping students</p><h1>Meet the IR Wing.</h1><p className="lead">We help IITK students discover international programmes and navigate the process.</p><div className="empty-panel"><span className="card-number">THE TEAM</span><h2>Team profiles will appear here.</h2><p>Add names, roles, approved photos, and contact channels once the team has reviewed the information.</p></div></section>; }
