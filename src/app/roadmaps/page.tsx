@@ -1,62 +1,66 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-export const metadata: Metadata = { title: "Roadmaps & Guidelines" };
+export const metadata: Metadata = { title: "Application Roadmaps" };
 
-const steps = [
+const STEPS = [
   {
-    step: "01",
-    title: "Explore programmes",
-    text: "Browse available exchange programmes and research internships. Check partner universities, duration, and current eligibility requirements.",
+    number: "1",
+    title: "Research and explore",
+    text: "Browse available programmes, check partner university offerings, and understand duration, eligibility, and credit transfer requirements. Start this process at least 6-9 months before your intended departure.",
   },
   {
-    step: "02",
-    title: "Prepare your documents",
-    text: "Collect transcripts, a statement of purpose, recommendation letters, and speak with your academic advisor about credit transfer.",
+    number: "2",
+    title: "Check eligibility & prepare documents",
+    text: "Verify CGPA requirements, language proficiency needs, and course prerequisites. Begin collecting transcripts, recommendation letters, and preparing your statement of purpose. Speak with your academic advisor about credit approvals.",
   },
   {
-    step: "03",
+    number: "3",
     title: "Submit your application",
-    text: "Follow the official application instructions for your programme. Submit all materials before the stated deadline.",
+    text: "Follow the official application process for your chosen programme. Submit all required materials before the deadline — typically in September for spring semester, and February for fall semester placements.",
   },
   {
-    step: "04",
-    title: "Get ready to depart",
-    text: "Complete institute formalities, arrange travel documentation, and attend pre-departure orientation sessions offered by the IR Wing.",
+    number: "4",
+    title: "Complete formalities & depart",
+    text: "Once accepted, complete institute clearances, arrange travel documentation (visa, insurance), attend pre-departure orientation sessions, and finalize housing and logistics.",
   },
 ] as const;
 
 export default function RoadmapsPage() {
   return (
-    <section className="content-page shell">
-      <p className="eyebrow">
-        <span className="eyebrow-dot" aria-hidden="true" />
-        A clear path forward
-      </p>
-      <h1 className="page-title">Roadmaps &amp; guidelines.</h1>
-      <p className="lead">
-        Understand the process before you begin. Follow the steps below.
-        Programme-specific checklists and timelines will be added as they are verified.
-      </p>
+    <div className="content-page">
+      <div className="shell">
+        <div className="page-header">
+          <div className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            A clear path forward
+          </div>
+          <h1 className="page-title">Application roadmaps.</h1>
+          <p className="page-lead">
+            Follow these steps to navigate the application process from start to finish.
+            Programme-specific checklists and detailed guides will be added as they are
+            verified with current requirements.
+          </p>
+        </div>
 
-      <div className="timeline">
-        {steps.map(({ step, title, text }) => (
-          <article className="timeline-item" key={step}>
-            <span>{step}</span>
-            <div>
-              <h2>{title}</h2>
-              <p>{text}</p>
+        <div className="timeline">
+          {STEPS.map((step) => (
+            <div key={step.number} className="timeline-item">
+              <div className="timeline-marker">{step.number}</div>
+              <div>
+                <h2 className="timeline-title">{step.title}</h2>
+                <p className="timeline-text">{step.text}</p>
+              </div>
             </div>
-          </article>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      <Link className="button button-primary" href="/opportunities">
-        Browse opportunities
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M7 17 17 7M7 7h10v10" />
-        </svg>
-      </Link>
-    </section>
+        <div style={{ textAlign: "center", marginTop: "var(--space-xl)" }}>
+          <Link className="hero-cta" href="/opportunities">
+            Browse opportunities
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }

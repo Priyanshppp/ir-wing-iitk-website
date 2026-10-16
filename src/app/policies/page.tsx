@@ -1,52 +1,75 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Policies & Programme Rules" };
+export const metadata: Metadata = { title: "Policies & Guidelines" };
 
-const policies = [
+const POLICIES = [
   {
-    number: "01",
-    title: "Semester Exchange",
-    text: "Official eligibility criteria, credit transfer guidelines, nomination procedures, and academic approval requirements for semester-abroad programmes.",
+    meta: "01 · Exchange",
+    title: "Semester Exchange Policies",
+    text: "Official eligibility criteria, credit transfer guidelines, nomination procedures, and academic approval requirements for semester-abroad programmes. Includes CGPA thresholds and course mapping rules.",
   },
   {
-    number: "02",
-    title: "International Internships",
-    text: "Institute guidance for international research visits, industrial internships, and the associated formalities and approvals.",
+    meta: "02 · Internships",
+    title: "International Internship Guidelines",
+    text: "Institute requirements for summer and semester research visits, industrial internships abroad, and the associated approval workflows. Covers NOC procedures and registration requirements.",
   },
   {
-    number: "03",
+    meta: "03 · Funding",
     title: "Funding & Travel Support",
-    text: "Applicable rules for scholarships, travel grants, insurance coverage, and expense reimbursement procedures.",
+    text: "Scholarship eligibility, travel grant procedures, insurance requirements, and expense reimbursement policies. Includes both institute schemes and external fellowship programmes.",
   },
 ] as const;
 
 export default function PoliciesPage() {
   return (
-    <section className="content-page shell">
-      <p className="eyebrow">
-        <span className="eyebrow-dot" aria-hidden="true" />
-        Know before you apply
-      </p>
-      <h1 className="page-title">Policies &amp; programme rules.</h1>
-      <p className="lead">
-        Use this page to find the latest official rules. Each entry should link to its
-        source and show when it was last checked.
-      </p>
+    <div className="content-page">
+      <div className="shell">
+        <div className="page-header">
+          <div className="page-eyebrow">
+            <span className="page-eyebrow-dot" aria-hidden="true" />
+            Know before you apply
+          </div>
+          <h1 className="page-title">Policies & guidelines.</h1>
+          <p className="page-lead">
+            Official institute rules, eligibility requirements, and procedural guidelines
+            for international programmes. Each policy entry should link to its authoritative
+            source and indicate when it was last verified.
+          </p>
+        </div>
 
-      <div className="resource-grid">
-        {policies.map(({ number, title, text }) => (
-          <article className="resource-card" key={number}>
-            <span className="card-number">{number}</span>
-            <h2>{title}</h2>
-            <p>{text}</p>
-            <span className="content-note">Official source link to be added.</span>
-          </article>
-        ))}
+        <div className="card-grid">
+          {POLICIES.map((policy) => (
+            <article key={policy.meta} className="editorial-card">
+              <span className="card-meta">{policy.meta}</span>
+              <h2 className="card-title">{policy.title}</h2>
+              <p className="card-text">{policy.text}</p>
+              <span
+                className="card-link"
+                style={{ color: "var(--text-muted)", cursor: "not-allowed" }}
+              >
+                Official link to be added
+              </span>
+            </article>
+          ))}
+        </div>
+
+        <p
+          style={{
+            maxWidth: "var(--text-measure)",
+            marginInline: "auto",
+            marginTop: "var(--space-xl)",
+            color: "var(--text-muted)",
+            fontSize: "14px",
+            lineHeight: "1.7",
+            textAlign: "center",
+            fontStyle: "italic",
+          }}
+        >
+          The policy descriptions on this page are for guidance only. Always consult the
+          official institute policy documents and confirm requirements with the relevant
+          academic office before proceeding with your application.
+        </p>
       </div>
-
-      <p className="content-note">
-        Policy text here is placeholder guidance. Replace with verified institute policy and link to the official source before publication.
-      </p>
-    </section>
+    </div>
   );
 }
