@@ -43,7 +43,7 @@ export default function RootLayout({
             <div>
               <div className="footer-brand-name">International Relations Wing</div>
               <p className="footer-brand-tagline">
-                IIT Kanpur's hub for international study, research, and exchange programmes.
+                IIT Kanpur&apos;s hub for international study, research, and exchange programmes.
                 Student-run guidance for global opportunities.
               </p>
               <div className="footer-social" style={{ marginTop: "var(--space-md)" }}>

@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Program Roadmaps — IR Wing, IIT Kanpur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    :root{
+      --navy:#12355b;--navy-dark:#0d2540;--navy-mid:#1a4a7a;
+      --accent:#38bdf8;--accent-light:#7dd3fc;--accent-glow:rgba(56,189,248,.3);
+      --mint:#06d6a0;--mint-light:#b5f5d0;
+      --white:#fff;--off-white:#f0f4f8;--gray:#e2e8f0;
+      --text:#1a1a2e;--text-mid:#374151;--text-light:#6b7280;
+      --purple:#7c3aed;--purple-bg:#ede9fe;
+      --green:#16a34a;--green-bg:#dcfce7;
+      --amber:#d97706;--amber-bg:#fef3c7;
+      --radius:12px;--radius-lg:18px;--ease:cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;color:var(--text);background:var(--off-white);line-height:1.65}
+
+    @keyframes gradientMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 var(--accent-glow)}70%{box-shadow:0 0 0 10px transparent}}
+    .anim-fadein{animation:fadeInUp .7s var(--ease) both}
+    .anim-d1{animation-delay:.1s}.anim-d2{animation-delay:.2s}.anim-d3{animation-delay:.3s}
+    .roadmap-section{opacity:0;transform:translateY(30px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+    .roadmap-section.visible{opacity:1;transform:none}
+
+    .topbar{background:var(--navy-dark);color:rgba(255,255,255,.65);font-size:.76rem;padding:5px 24px;display:flex;justify-content:space-between;align-items:center}
+    .topbar a{color:var(--accent-light);text-decoration:none}.topbar a:hover{text-decoration:underline}
+
+    header{background:linear-gradient(135deg,var(--navy-dark),var(--navy) 60%,var(--navy-mid));padding:12px 36px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.25)}
+    .logo-area{display:flex;align-items:center;gap:14px}
+    .logo-img{width:46px;height:46px;border-radius:50%;object-fit:cover;background:#fff;padding:3px;flex-shrink:0}
+    .logo-text h1{font-family:'Poppins',sans-serif;color:#fff;font-size:1.05rem;font-weight:700;line-height:1.2}
+    .logo-text p{color:var(--accent-light);font-size:.73rem;letter-spacing:.06em;margin-top:1px}
+    nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:.85rem;padding:7px 16px;border-radius:6px;transition:.3s var(--ease);position:relative;display:flex;align-items:center;gap:6px}
+    nav a::after{content:'';position:absolute;bottom:2px;left:16px;right:16px;height:2px;background:var(--accent);transform:scaleX(0);transition:transform .3s var(--ease)}
+    nav a:hover::after{transform:scaleX(1)}
+    nav a:hover{color:var(--accent-light)}
+
+    /* ── Hero ── */
+    .hero{background:linear-gradient(135deg,var(--navy-dark) 0%,#0f2b4a 25%,var(--navy) 50%,#163560 75%,var(--navy-mid) 100%);color:#fff;padding:72px 40px 56px;text-align:center;position:relative;overflow:hidden}
+    .hero::before{content:'';position:absolute;inset:0;background:
+      radial-gradient(ellipse 600px 400px at 15% 30%,rgba(124,58,237,.18) 0%,transparent 70%),
+      radial-gradient(ellipse 500px 350px at 85% 20%,rgba(6,214,160,.14) 0%,transparent 70%),
+      radial-gradient(ellipse 400px 300px at 50% 80%,rgba(56,189,248,.12) 0%,transparent 70%),
+      radial-gradient(ellipse 300px 250px at 75% 70%,rgba(244,114,182,.1) 0%,transparent 70%);pointer-events:none}
+    .hero::after{content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(124,58,237,.08),transparent 70%);animation:float 8s ease-in-out infinite;pointer-events:none}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.18);color:#fff;padding:7px 20px;border-radius:50px;font-size:.8rem;font-weight:500;letter-spacing:.04em;margin-bottom:18px;animation:float 4s ease-in-out infinite}
+    .hero-badge i{color:var(--mint)}
+    .hero h2{font-family:'Poppins',sans-serif;font-size:clamp(1.7rem,4vw,2.7rem);font-weight:700;margin-bottom:14px;line-height:1.15;background:linear-gradient(135deg,#fff 0%,var(--accent-light) 50%,#b5f5d0 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero p{font-size:1rem;color:rgba(255,255,255,.72);max-width:640px;margin:0 auto 28px}
+    .hero-pills{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:rgba(255,255,255,.9);padding:6px 16px;border-radius:50px;font-size:.82rem;text-decoration:none;transition:.3s var(--ease);display:flex;align-items:center;gap:6px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+    .pill:hover{background:var(--accent);color:var(--navy-dark);border-color:var(--accent);transform:scale(1.06)}
+
+    main{max-width:1160px;margin:0 auto;padding:56px 24px}
+    .section-label{display:flex;align-items:center;gap:12px;color:var(--navy);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px}
+    .section-label::after{content:'';flex:1;height:1px;background:var(--gray)}
+    .section-title{font-family:'Poppins',sans-serif;font-size:clamp(1.35rem,3vw,1.85rem);color:var(--navy);font-weight:700;margin-bottom:6px}
+    .section-sub{color:var(--text-light);font-size:.92rem;margin-bottom:36px}
+    .roadmap-section{margin-bottom:84px;scroll-margin-top:90px}
+
+    /* Program header */
+    .prog-header{background:linear-gradient(135deg,var(--navy),var(--navy-mid));border-radius:var(--radius-lg) var(--radius-lg) 0 0;padding:28px 32px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+    .prog-icon{width:58px;height:58px;background:rgba(56,189,248,.18);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:var(--accent-light);flex-shrink:0}
+    .prog-header h3{font-family:'Poppins',sans-serif;color:#fff;font-size:1.3rem;font-weight:700}
+    .prog-header>div:nth-child(2) p{color:rgba(255,255,255,.6);font-size:.84rem;margin-top:4px}
+    .stats-row{display:flex;flex-wrap:wrap;gap:0;margin-left:auto}
+    .stat{border-left:1px solid rgba(255,255,255,.15);padding:0 22px;text-align:center}
+    .stat .val{font-size:1.2rem;font-weight:700;color:var(--accent-light)}
+    .stat .lbl{font-size:.7rem;color:rgba(255,255,255,.55)}
+
+    /* Timeline container */
+    .timeline-wrap{background:#fff;border-radius:0 0 var(--radius-lg) var(--radius-lg);border:1px solid rgba(18,53,91,.06);border-top:none;padding:36px 32px}
+
+    .phase-label{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 14px;border-radius:50px;margin-bottom:18px}
+    .phase-label.prep{background:var(--purple-bg);color:var(--purple)}
+    .phase-label.apply{background:#dbeafe;color:#1d4ed8}
+    .phase-label.during{background:var(--green-bg);color:var(--green)}
+    .phase-label.after{background:#e2e8f0;color:var(--navy-dark)}
+
+    .phases-bar{display:flex;gap:3px;margin-bottom:32px;border-radius:8px;overflow:hidden}
+    .phase-seg{flex:1;padding:9px 8px;text-align:center;font-size:.73rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+    .ps-prep{background:var(--purple);color:#fff}
+    .ps-apply{background:var(--accent);color:var(--navy-dark)}
+    .ps-during{background:var(--green);color:#fff}
+    .ps-after{background:var(--navy-dark);color:#fff}
+
+    .timeline{position:relative;padding-left:32px}
+    .timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--navy),var(--accent),var(--mint));border-radius:2px}
+    .tl-item{position:relative;margin-bottom:24px}
+    .tl-item:last-child{margin-bottom:0}
+    .tl-dot{position:absolute;left:-26px;top:6px;width:16px;height:16px;border:3px solid #fff;border-radius:50%;transition:.3s var(--ease);background:var(--navy);box-shadow:0 0 0 2px var(--navy)}
+    .tl-dot.purple{background:var(--purple);box-shadow:0 0 0 2px var(--purple)}
+    .tl-dot.sky{background:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+    .tl-dot.green{background:var(--green);box-shadow:0 0 0 2px var(--green)}
+    .tl-item:hover .tl-dot{animation:pulse 1.5s ease infinite}
+
+    .tl-card{background:var(--off-white);border-radius:var(--radius);padding:16px 20px;border-left:3px solid var(--navy);transition:.35s var(--ease);cursor:default}
+    .tl-card:hover{transform:translateX(6px);box-shadow:0 8px 28px rgba(56,189,248,.1);background:#fff}
+    .tl-card.purple{border-left-color:var(--purple)}
+    .tl-card.sky{border-left-color:var(--accent)}
+    .tl-card.green{border-left-color:var(--green)}
+    .tl-timing{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--text-light);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+    .tl-card h5{font-family:'Poppins',sans-serif;font-size:.92rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+    .tl-card ul{list-style:none}
+    .tl-card ul li{font-size:.85rem;color:var(--text-mid);padding:3px 0;display:flex;gap:8px;align-items:flex-start}
+    .tl-card ul li::before{content:'✓';color:var(--accent);font-weight:700;flex-shrink:0}
+
+    .tip-box{border-radius:var(--radius);padding:14px 18px;display:flex;gap:12px;align-items:flex-start;margin-top:22px;font-size:.85rem}
+    .tip-box.navy{background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.2)}
+    .tip-box.amber{background:var(--amber-bg);border:1px solid #fbbf24}
+    .tip-box.green{background:var(--green-bg);border:1px solid #86efac}
+    .tip-box i{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+    .tip-box.navy i{color:var(--accent)}.tip-box.amber i{color:var(--amber)}.tip-box.green i{color:var(--green)}
+    .tip-box p{color:var(--text-mid);line-height:1.65}
+    .tip-box strong{color:var(--navy)}
+    .phase-sep{height:1px;background:var(--gray);margin:28px 0}
+
+    .checklist{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px;margin-top:16px}
+    .checklist li{background:var(--off-white);border-radius:8px;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:.85rem;color:var(--text-mid);border:1px solid var(--gray);transition:.3s var(--ease)}
+    .checklist li:hover{background:#dbeafe;border-color:var(--accent);transform:translateY(-1px)}
+    .checklist li i{color:var(--accent);width:16px;text-align:center;flex-shrink:0}
+
+    /* ── Partner Universities Grid ── */
+    .univ-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:4px}
+    .univ-card{background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray);transition:.35s var(--ease);box-shadow:0 2px 8px rgba(18,53,91,.06)}
+    .univ-card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(18,53,91,.14);border-color:var(--accent)}
+    .univ-img-wrap{height:110px;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center}
+    .univ-img{width:100%;height:100%;object-fit:cover;transition:transform .4s var(--ease)}
+    .univ-card:hover .univ-img{transform:scale(1.06)}
+    .univ-placeholder-icon{font-size:2.2rem;color:rgba(255,255,255,.5)}
+    .univ-info{padding:10px 12px}
+    .univ-name{font-family:'Poppins',sans-serif;font-size:.82rem;font-weight:600;color:var(--navy);margin-bottom:3px}
+    .univ-country{font-size:.72rem;color:var(--text-light);display:flex;align-items:center;gap:5px}
+    .univ-card-more .univ-img-wrap{cursor:pointer}
+
+    /* ── FAQ Accordion ── */
+    .faq-list{display:flex;flex-direction:column;gap:8px}
+    .faq-item{border:1px solid var(--gray);border-radius:var(--radius);overflow:hidden;transition:.3s var(--ease)}
+    .faq-item:hover{border-color:rgba(56,189,248,.4)}
+    .faq-item[open]{border-color:var(--accent);box-shadow:0 4px 16px rgba(56,189,248,.1)}
+    .faq-item summary{padding:13px 18px;font-size:.87rem;font-weight:600;color:var(--navy);cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none;background:#fff}
+    .faq-item summary::-webkit-details-marker{display:none}
+    .faq-item summary::after{content:'+';font-size:1.1rem;color:var(--accent);flex-shrink:0;font-weight:700;transition:transform .3s var(--ease)}
+    .faq-item[open] summary::after{content:'−'}
+    .faq-item summary:hover{background:rgba(56,189,248,.04)}
+    .faq-item p{padding:0 18px 14px;font-size:.84rem;color:var(--text-mid);line-height:1.7;background:#fff;border-top:1px solid var(--gray)}
+
+    .contact-banner{background:linear-gradient(135deg,var(--navy-dark),var(--navy));border-radius:var(--radius-lg);padding:44px 40px;text-align:center;color:#fff;margin-top:56px;position:relative;overflow:hidden}
+    .contact-banner::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(56,189,248,.1),transparent 60%);pointer-events:none}
+    .contact-banner h3{font-family:'Poppins',sans-serif;font-size:1.45rem;margin-bottom:8px}
+    .contact-banner>p{color:rgba(255,255,255,.65);margin-bottom:24px}
+    .contact-grid{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-bottom:24px}
+    .contact-item{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:var(--radius);padding:12px 20px;display:flex;align-items:center;gap:10px;font-size:.86rem;color:rgba(255,255,255,.85);transition:.3s var(--ease)}
+    .contact-item:hover{background:rgba(56,189,248,.15);border-color:rgba(56,189,248,.3)}
+    .contact-item i{color:var(--accent-light)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 26px;border-radius:8px;font-weight:600;font-size:.88rem;text-decoration:none;transition:.3s var(--ease)}
+    .btn-accent{background:var(--accent);color:var(--navy-dark)}
+    .btn-accent:hover{background:var(--accent-light);transform:scale(1.03);box-shadow:0 8px 24px var(--accent-glow)}
+
+    footer{background:var(--navy-dark);color:rgba(255,255,255,.5);text-align:center;padding:20px;font-size:.78rem}
+    footer a{color:var(--accent-light);text-decoration:none}
+
+    @media(max-width:768px){.stats-row{display:none}.prog-header{flex-wrap:wrap}.timeline-wrap{padding:24px 18px}.univ-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
+    @media(max-width:640px){header{padding:10px 16px;flex-direction:column;gap:10px;text-align:center}.hero{padding:52px 16px 44px}main{padding:36px 14px}.topbar{flex-direction:column;gap:4px;text-align:center}}
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <span><i class="fa fa-globe"></i>&nbsp; International Relations Wing — IIT Kanpur</span>
+  <span><a href="https://www.iitk.ac.in/oir/" target="_blank">OIR Official Portal</a> &nbsp;|&nbsp; <a href="mailto:oir@iitk.ac.in">oir@iitk.ac.in</a></span>
+</div>
+
+<header>
+  <div class="logo-area">
+    <img src="ir-wing-logo.png" alt="IR Wing IITK Logo" class="logo-img" />
+    <div class="logo-text"><h1>International Relations Wing</h1><p>IIT KANPUR</p></div>
+  </div>
+  <nav><a href="https://www.iitk.ac.in/oir/" target="_blank"><i class="fa fa-external-link-alt"></i> OIR</a></nav>
+</header>
+
+<section class="hero">
+  <div class="hero-badge anim-fadein"><i class="fa fa-map-location-dot"></i> Step-by-Step Guides</div>
+  <h2 class="anim-fadein anim-d1">Program Roadmaps for International Opportunities</h2>
+  <p class="anim-fadein anim-d2">Detailed, month-by-month action plans to help IITK students navigate every international program — from first research to final clearance.</p>
+  <div class="hero-pills anim-fadein anim-d3">
+    <a class="pill" href="#rm-semester"><i class="fa fa-arrows-rotate"></i> Semester Exchange</a>
+    <a class="pill" href="#rm-internship"><i class="fa fa-briefcase"></i> Internships</a>
+    <a class="pill" href="#rm-research"><i class="fa fa-flask"></i> Research Internships</a>
+    <a class="pill" href="#rm-projects"><i class="fa fa-diagram-project"></i> Projects</a>
+    <a class="pill" href="#rm-higher"><i class="fa fa-graduation-cap"></i> Higher Studies</a>
+  </div>
+</section>
+
+<main>
+
+<!-- ══════════════════════════════════════════════════
+     1. SEMESTER EXCHANGE  (updated from official FAQ)
+     ══════════════════════════════════════════════════ -->
+<section class="roadmap-section" id="rm-semester">
+  <div class="section-label"><i class="fa fa-arrows-rotate"></i> Roadmap 01</div>
+  <h2 class="section-title">Semester Exchange Programme</h2>
+  <p class="section-sub">Your complete step-by-step guide — from eligibility check to returning to campus. Based on the <em>official SemEx FAQ for IITK students</em>.</p>
+  <div>
+    <div class="prog-header">
+      <div class="prog-icon"><i class="fa fa-arrows-rotate"></i></div>
+      <div><h3>Semester Exchange — Action Roadmap</h3><p>Typically 3rd-year UG; 2+ semesters completed for PG students</p></div>
+      <div class="stats-row">
+        <div class="stat"><div class="val">200</div><div class="lbl">Min Credits (UG)</div></div>
+        <div class="stat"><div class="val">100</div><div class="lbl">Max Credit Waiver</div></div>
+        <div class="stat"><div class="val">50+</div><div class="lbl">Partner Univs</div></div>
+        <div class="stat"><div class="val">0</div><div class="lbl">CGPA Impact Abroad</div></div>
+      </div>
+    </div>
+    <div class="timeline-wrap">
+      <div class="phases-bar">
+        <div class="phase-seg ps-prep">Preparation</div>
+        <div class="phase-seg ps-apply">Application</div>
+        <div class="phase-seg ps-during">Exchange Period</div>
+        <div class="phase-seg ps-after">Post Return</div>
+      </div>
+
+      <!-- PHASE 1 -->
+      <div class="phase-label prep"><i class="fa fa-binoculars"></i> Phase 1 · Preparation (12–18 months before)</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot purple"></div>
+          <div class="tl-card purple">
+            <div class="tl-timing"><i class="fa fa-clock"></i> ~18 months before</div>
+            <h5>Check Your Eligibility</h5>
+            <ul>
+              <li>Consult the UG Manual (Section 8.5) or PG Manual (Section 6) for exact requirements</li>
+              <li>UG: minimum 200 credits of coursework must be completed — this limit is strict and non-negotiable</li>
+              <li>PG: minimum 2 full semesters completed at IIT Kanpur before the exchange semester begins</li>
+              <li>Pay attention to the minimum CPI requirement, credit requirements, and any departmental or programme-specific conditions</li>
+              <li>⚠ Caution: exercise care if planning exchange in your final semester — academic and administrative timelines may affect degree completion. Students must remain registered at IITK throughout the exchange.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot purple"></div>
+          <div class="tl-card purple">
+            <div class="tl-timing"><i class="fa fa-clock"></i> ~15 months before</div>
+            <h5>Shortlist Partner Universities</h5>
+            <ul>
+              <li>Start by reviewing active partner universities and MoUs on the <a href="https://www.iitk.ac.in/oir/" target="_blank" style="color:var(--accent)">OIR website</a></li>
+              <li><strong>Departmental compatibility:</strong> identify universities offering courses relevant to your field and academic interests</li>
+              <li><strong>Academic calendar:</strong> check if the host university's semester dates align with IITK's — conflicts are handled case-by-case with DOAA and your DUGC</li>
+              <li><strong>Course availability:</strong> review courses offered specifically during your intended exchange semester (not just general offerings)</li>
+              <li><strong>Eligibility requirements:</strong> check the host university's own CPI or grade criteria in addition to IITK's minimums</li>
+              <li><strong>Funding &amp; expenses:</strong> explore available scholarships and estimate travel, accommodation, and living costs</li>
+              <li><strong>Language requirements:</strong> verify whether courses are taught in English or require certified language proficiency</li>
+              <li>Consult OIR's archived factsheets from previous years and speak to seniors who've attended your target university</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot purple"></div>
+          <div class="tl-card purple">
+            <div class="tl-timing"><i class="fa fa-clock"></i> ~12 months before</div>
+            <h5>Course Mapping &amp; Academic Planning</h5>
+            <ul>
+              <li>DE and OE courses can be mapped if there is sufficient content overlap — DUGC approval is required</li>
+              <li>DC (Departmental Core) courses can also be mapped if the content alignment is verified by your DUGC</li>
+              <li>Get course equivalency pre-approved by your department <em>before departure</em> — post-facto approvals are not guaranteed</li>
+              <li>Plan your IITK semester load around the exchange period to avoid scheduling conflicts</li>
+              <li>Prepare your academic CV and obtain an updated official transcript</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+      <div class="phase-sep"></div>
+
+      <!-- PHASE 2 -->
+      <div class="phase-label apply"><i class="fa fa-paper-plane"></i> Phase 2 · Application (6–8 months before)</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot sky"></div>
+          <div class="tl-card sky">
+            <div class="tl-timing"><i class="fa fa-clock"></i> Watch OIR announcements regularly</div>
+            <h5>Respond to OIR's Call for Applications</h5>
+            <ul>
+              <li>Monitor the OIR Announcements page — calls are released semester-wise and are time-sensitive</li>
+              <li>Submit your CV and latest official academic transcript to OIR</li>
+              <li>Consult previous years' factsheets (archived on OIR website) for university-specific information</li>
+              <li>Speak to seniors who've previously attended your shortlisted universities for practical tips</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot sky"></div>
+          <div class="tl-card sky">
+            <div class="tl-timing"><i class="fa fa-clock"></i> Upon receiving nomination from OIR</div>
+            <h5>DUGC / DPGC Approval &amp; Course Finalisation</h5>
+            <ul>
+              <li>Prepare a detailed proposal: host university, specific courses, duration, and course mapping rationale</li>
+              <li>DUGC approval is required to finalise course mapping — this step is mandatory</li>
+              <li>Consult your advisor if there are any scheduling conflicts or calendar overlaps with the host</li>
+              <li>The host university's semester dates are fixed — any flexibility must be confirmed directly with them</li>
+              <li>Obtain written approval and a signed course plan from your DUGC/DPGC</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot sky"></div>
+          <div class="tl-card sky">
+            <div class="tl-timing"><i class="fa fa-clock"></i> After DUGC approval</div>
+            <h5>SUGC / SPGC Senate Clearance</h5>
+            <ul>
+              <li>Forward the DUGC-approved application to the Senate Undergraduate Committee (SUGC)</li>
+              <li>SUGC reviews and grants a credit waiver of up to 100 credits maximum</li>
+              <li>Obtain DOAA NoC as applicable</li>
+              <li>Receive the formal SUGC clearance letter before submitting anything to the host university</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot sky"></div>
+          <div class="tl-card sky">
+            <div class="tl-timing"><i class="fa fa-clock"></i> Post clearance</div>
+            <h5>Host University Submission &amp; Pre-Departure</h5>
+            <ul>
+              <li>Complete all acceptance and nomination formalities as instructed by OIR and the host university</li>
+              <li>Follow the host university's application and registration portal instructions carefully</li>
+              <li>Confirm visa requirements and prepare necessary documents well in advance</li>
+              <li>Contact the host university directly to enquire about scholarships — some are subject- or department-specific</li>
+              <li>Tuition fees are paid to IITK only; you are responsible for accommodation, travel, food, and living expenses at the host location</li>
+              <li>Arrange accommodation (check if the host provides it), travel insurance, and health coverage</li>
+              <li>Keep copies of all important correspondence, approvals, and registration documents</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+      <div class="phase-sep"></div>
+
+      <!-- PHASE 3 -->
+      <div class="phase-label during"><i class="fa fa-globe"></i> Phase 3 · During Exchange</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <div class="tl-card green">
+            <div class="tl-timing"><i class="fa fa-clock"></i> First week at host university</div>
+            <h5>Orientation &amp; Course Registration</h5>
+            <ul>
+              <li>Attend the host university's international/exchange student orientation</li>
+              <li>Confirm course registrations match your DUGC-approved plan exactly</li>
+              <li>Any changes must be communicated immediately to your IITK department and OIR</li>
+              <li>Keep copies of all registration confirmations and enrolment documents</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-dot green"></div>
+          <div class="tl-card green">
+            <div class="tl-timing"><i class="fa fa-clock"></i> Throughout the semester</div>
+            <h5>Academic Performance &amp; Communication</h5>
+            <ul>
+              <li>Grades earned abroad are <strong>not</strong> added to your IITK CGPA — you receive a course waiver for approved courses</li>
+              <li>You must pass all approved courses at the host institution</li>
+              <li>Maintain regular contact with your IITK department advisor and OIR</li>
+              <li>For academic or course-mapping difficulties, contact your DUGC, SUGC, DOAA, or OIR promptly — approach the responsible authority directly to avoid delays</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+      <div class="phase-sep"></div>
+
+      <!-- PHASE 4 -->
+      <div class="phase-label after"><i class="fa fa-flag-checkered"></i> Phase 4 · Post Return</div>
+      <div class="timeline">
+
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-card">
+            <div class="tl-timing"><i class="fa fa-clock"></i> Within 2–4 weeks of return</div>
+            <h5>Credit Transfer &amp; Documentation</h5>
+            <ul>
+              <li>Submit official transcript from the host university to OIR and your department</li>
+              <li>DUGC verifies courses and recommends credit transfer as per the pre-approved mapping</li>
+              <li>Credits applied under SUGC's pre-approved waiver — grades do not accumulate into your IITK CGPA</li>
+              <li>Submit an exchange experience report to OIR (mandatory)</li>
+              <li>If you decided not to proceed after selection: withdraw promptly through the prescribed process — timely withdrawal allows waitlisted students to participate. Communicate your decision as early as possible.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- /timeline -->
+
+      <!-- ── Partner Universities ── -->
+      <div class="phase-sep"></div>
+      <h4 style="font-family:'Poppins',sans-serif;color:var(--navy);font-size:1rem;margin-bottom:6px;">
+        <i class="fa fa-landmark"></i> Partner Universities
+      </h4>
+      <p style="font-size:.82rem;color:var(--text-light);margin-bottom:16px;">
+        IITK has active MoUs with 50+ universities worldwide. A selection of key partners is shown below — <a href="https://www.iitk.ac.in/oir/" target="_blank" style="color:var(--accent)">see full list on OIR</a>.
+      </p>
+      <div class="univ-grid">
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/ETH_Zurich_from_Polyterrace.jpg&width=480" alt="ETH Zürich campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">ETH Zürich</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Switzerland · Europe</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Technische_Universit%C3%A4t_M%C3%BCnchen.jpg&width=480" alt="TU Munich campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">TU Munich</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Germany · Europe</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/University_Hall%2C_National_University_of_Singapore_-_20070125.jpg&width=480" alt="NUS Singapore campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">NUS Singapore</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Singapore · Asia</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Kungliga_Tekniska_H%C3%B6gskolan_KTH4.jpg&width=480" alt="KTH Royal Institute campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">KTH Royal Institute</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Sweden · Europe</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/KAIST_campus_at_night.jpg&width=480" alt="KAIST campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">KAIST</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> South Korea · Asia</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/Politecnico_Torino.JPG&width=480" alt="Politecnico di Torino campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">Politecnico di Torino</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Italy · Europe</div>
+          </div>
+        </div>
+        <div class="univ-card">
+          <div class="univ-img-wrap">
+            <img src="https://commons.wikimedia.org/w/index.php?title=Special:Redirect/file/EPFL_campus_2017.jpg&width=480" alt="EPFL campus" class="univ-img" loading="lazy" />
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">EPFL</div>
+            <div class="univ-country"><i class="fa fa-location-dot"></i> Switzerland · Europe</div>
+          </div>
+        </div>
+        <div class="univ-card univ-card-more">
+          <div class="univ-img-wrap" style="background:linear-gradient(135deg,#12355b,#38bdf8);display:flex;align-items:center;justify-content:center;">
+            <div class="univ-placeholder-icon"><i class="fa fa-plus"></i></div>
+          </div>
+          <div class="univ-info">
+            <div class="univ-name">40+ More Partners</div>
+            <div class="univ-country">
+              <a href="https://www.iitk.ac.in/oir/" target="_blank" style="color:var(--accent);text-decoration:none;font-size:.76rem;">View full list on OIR →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="tip-box navy">
+        <i class="fa fa-lightbulb"></i>
+        <p><strong>Key Advice:</strong> Start early — review university options, eligibility, and academic calendars well in advance. Prioritise academic feasibility, consult your DUGC and OIR for credit mapping, explore funding early, and use previous students' experiences as a guide (but verify updated information).</p>
+      </div>
+
+    </div><!-- /timeline-wrap -->
+  </div>
+</section>
+
+<!-- ══ 2. INTERNSHIPS ══ -->
+<section class="roadmap-section" id="rm-internship">
+  <div class="section-label"><i class="fa fa-briefcase"></i> Roadmap 02</div>
+  <h2 class="section-title">Internships Abroad</h2>
+  <p class="section-sub">Industry and academic internships at international companies and universities.</p>
+  <div>
+    <div class="prog-header">
+      <div class="prog-icon"><i class="fa fa-briefcase"></i></div>
+      <div><h3>Internship Abroad — Action Roadmap</h3><p>Pre-final year UG and PG · Self-initiated or OIR/SPO facilitated</p></div>
+      <div class="stats-row"><div class="stat"><div class="val">Sep–Dec</div><div class="lbl">Apply Window</div></div><div class="stat"><div class="val">2–6</div><div class="lbl">Months Duration</div></div></div>
+    </div>
+    <div class="timeline-wrap">
+      <div class="phases-bar"><div class="phase-seg ps-prep">Search</div><div class="phase-seg ps-apply">Apply</div><div class="phase-seg ps-during">Intern Period</div><div class="phase-seg ps-after">Completion</div></div>
+
+      <div class="phase-label prep"><i class="fa fa-search"></i> Phase 1 · Search (6–9 months before)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot purple"></div><div class="tl-card purple"><h5>Identify Opportunities &amp; Build Profile</h5><ul><li>Check OIR for company-sponsored international intern slots</li><li>Use LinkedIn, Glassdoor, and career pages for direct applications</li><li>Update CV with projects, research, and technical skills</li><li>Prepare tailored cover letters and secure faculty recommendations</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label apply"><i class="fa fa-paper-plane"></i> Phase 2 · Apply &amp; Accept (4–6 months before)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><h5>Submit &amp; Accept</h5><ul><li>Apply to multiple companies; track deadlines carefully</li><li>Prepare for technical interviews and coding challenges</li><li>Once you accept an offer, inform OIR and department immediately</li><li>SPO Rule: Withdraw from other processes upon acceptance</li><li>Obtain NOC from your department if required</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label during"><i class="fa fa-globe"></i> Phase 3 · During</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-card green"><h5>Pre-Departure &amp; Internship</h5><ul><li>Obtain work/intern visa from the relevant embassy</li><li>Arrange travel, accommodation, and health insurance</li><li>Carry official IITK enrollment letter and transcript</li><li>Open international bank account or get an international card</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label after"><i class="fa fa-flag-checkered"></i> Phase 4 · Completion</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><h5>After the Internship</h5><ul><li>Obtain completion/experience letter from the company</li><li>Submit a brief report to OIR if required</li><li>Update your LinkedIn and CV with the experience</li><li>Mentor juniors — share your experience with the IR Wing</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 3. RESEARCH INTERNSHIPS ══ -->
+<section class="roadmap-section" id="rm-research">
+  <div class="section-label"><i class="fa fa-flask"></i> Roadmap 03</div>
+  <h2 class="section-title">Research Internships Abroad</h2>
+  <p class="section-sub">Pursue research in leading global labs — DAAD, Charpak, and more.</p>
+  <div>
+    <div class="prog-header">
+      <div class="prog-icon"><i class="fa fa-flask"></i></div>
+      <div><h3>Research Internship — Action Roadmap</h3><p>Summer research programs · Typically 2–3 months · Apply Sep–Dec</p></div>
+      <div class="stats-row"><div class="stat"><div class="val">Sep</div><div class="lbl">Start Applying</div></div><div class="stat"><div class="val">Nov–Jan</div><div class="lbl">Deadlines</div></div><div class="stat"><div class="val">May–Jul</div><div class="lbl">Typical Duration</div></div></div>
+    </div>
+    <div class="timeline-wrap">
+      <div class="phases-bar"><div class="phase-seg ps-prep">Profile Building</div><div class="phase-seg ps-apply">Applications</div><div class="phase-seg ps-during">Research Period</div><div class="phase-seg ps-after">After Return</div></div>
+
+      <div class="phase-label prep"><i class="fa fa-tools"></i> Phase 1 · Profile Building (year-round)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot purple"></div><div class="tl-card purple"><h5>Build Research Profile &amp; Identify Programs</h5><ul><li>Join a research group at IITK with a faculty member</li><li>Aim for publications, posters, or conference presentations</li><li>Maintain a strong CPI — most programs require 7.5–8.5+</li><li>Shortlist DAAD WISE, Charpak, SN Bose, and direct outreach targets</li><li>Read target professors' recent papers for research alignment</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label apply"><i class="fa fa-paper-plane"></i> Phase 2 · Applications (Sep–Jan)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><div class="tl-timing"><i class="fa fa-clock"></i> Sep–Oct</div><h5>Prepare Application Materials</h5><ul><li>Write a strong, specific SoP / Research Proposal</li><li>Update research-focused CV — highlight projects, skills, GPA</li><li>Request LORs from 2–3 faculty (give 4–6 weeks notice)</li><li>Get official sealed transcript from academic section</li></ul></div></div>
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><div class="tl-timing"><i class="fa fa-clock"></i> Oct–Dec</div><h5>Submit &amp; Confirm</h5><ul><li>DAAD WISE: apply via DAAD portal (closes Nov–Dec)</li><li>Charpak: apply via French Embassy portal (closes Jan–Feb)</li><li>Direct Outreach: personalised emails + CV + proposal</li><li>After acceptance — inform OIR, get NOC, apply for visa</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label during"><i class="fa fa-microscope"></i> Phase 3 · Research Period (May–Jul)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-card green"><h5>During Your Research Internship</h5><ul><li>Set clear research goals and milestones with your host supervisor</li><li>Document progress regularly — builds your publication portfolio</li><li>Network with other researchers and attend lab seminars</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label after"><i class="fa fa-flag-checkered"></i> Phase 4 · After Return</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><h5>Leverage Your Experience</h5><ul><li>Request completion certificate and recommendation letter from host supervisor</li><li>Continue collaboration if possible — aim for a paper or technical report</li><li>Use the experience in your higher studies application SoP</li><li>Share learnings with juniors through the IR Wing</li></ul></div></div>
+      </div>
+
+      <div class="tip-box amber"><i class="fa fa-triangle-exclamation"></i><p><strong>Deadline Alert:</strong> Research internship applications typically open in September for the following summer. Missing this window means missing the full cycle. Set reminders starting in August every year.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 4. PROJECTS ══ -->
+<section class="roadmap-section" id="rm-projects">
+  <div class="section-label"><i class="fa fa-diagram-project"></i> Roadmap 04</div>
+  <h2 class="section-title">International Projects (BTP / MTP / Collaborative)</h2>
+  <p class="section-sub">Credit-bearing research projects in collaboration with international institutions.</p>
+  <div>
+    <div class="prog-header">
+      <div class="prog-icon"><i class="fa fa-diagram-project"></i></div>
+      <div><h3>International Project — Action Roadmap</h3><p>BTP, MTP, or independent research projects with partner institutes</p></div>
+      <div class="stats-row"><div class="stat"><div class="val">Anytime</div><div class="lbl">Start Outreach</div></div><div class="stat"><div class="val">DUGC</div><div class="lbl">Approval Required</div></div></div>
+    </div>
+    <div class="timeline-wrap">
+      <div class="phase-label prep"><i class="fa fa-binoculars"></i> Phase 1 · Identify Opportunity</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot purple"></div><div class="tl-card purple"><h5>Find a Collaborative Project</h5><ul><li>Explore IITK's Collaborative Research Centres: Rice-IITK, La Trobe, UB, NYU Tandon</li><li>Ask your IITK supervisor about ongoing international co-supervised projects</li><li>Review active MoUs on OIR website for project-eligible partnerships</li><li>Attend seminars featuring foreign visiting faculty</li></ul></div></div>
+      </div>
+      <div class="phase-sep"></div>
+      <div class="phase-label apply"><i class="fa fa-paper-plane"></i> Phase 2 · Approval</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><h5>Get Approvals &amp; Register</h5><ul><li>Discuss the project idea with your IITK faculty supervisor</li><li>Obtain written consent and define co-supervision arrangement</li><li>Register project formally with your department (BTP/MTP)</li><li>If under an active MoU, register with OIR for coordination</li></ul></div></div>
+      </div>
+      <div class="phase-sep"></div>
+      <div class="phase-label during"><i class="fa fa-globe"></i> Phase 3 · Execution</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-card green"><h5>Execution &amp; Reporting</h5><ul><li>Maintain bi-weekly progress updates to both supervisors</li><li>Document all research outputs meticulously</li><li>Follow both institutions' research ethics and IP policies</li></ul></div></div>
+      </div>
+      <div class="phase-sep"></div>
+      <div class="phase-label after"><i class="fa fa-flag-checkered"></i> Phase 4 · Evaluation</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><h5>Final Evaluation &amp; Credit</h5><ul><li>Submit project report to IITK supervisor and department</li><li>Joint evaluation by IITK and host supervisor</li><li>Credits registered under BTP/MTP in IITK grade sheet</li><li>Explore conference publication or patent if applicable</li></ul></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 5. HIGHER STUDIES ══ -->
+<section class="roadmap-section" id="rm-higher">
+  <div class="section-label"><i class="fa fa-graduation-cap"></i> Roadmap 05</div>
+  <h2 class="section-title">Higher Studies Abroad (MS / PhD)</h2>
+  <p class="section-sub">Your complete 18-month action plan from early preparation to offer acceptance.</p>
+  <div>
+    <div class="prog-header">
+      <div class="prog-icon"><i class="fa fa-graduation-cap"></i></div>
+      <div><h3>Higher Studies — Action Roadmap</h3><p>MS, PhD and Joint Degree pathways · Comprehensive 18-month guide</p></div>
+      <div class="stats-row"><div class="stat"><div class="val">GRE</div><div class="lbl">Required (US/CA)</div></div><div class="stat"><div class="val">Aug–Dec</div><div class="lbl">Apply Window</div></div><div class="stat"><div class="val">Sep–Jan</div><div class="lbl">Deadlines</div></div></div>
+    </div>
+    <div class="timeline-wrap">
+      <div class="phases-bar"><div class="phase-seg ps-prep">Foundation</div><div class="phase-seg ps-apply">Strategy</div><div class="phase-seg ps-during">Application</div><div class="phase-seg ps-after">Post Offer</div></div>
+
+      <div class="phase-label prep"><i class="fa fa-seedling"></i> Phase 1 · Foundation (18–12 months before)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot purple"></div><div class="tl-card purple"><div class="tl-timing"><i class="fa fa-clock"></i> Start Early (2nd–3rd year)</div><h5>Academic &amp; Research Foundation</h5><ul><li>Maintain a strong CPI — aim for 8.0+ for top PhD programs</li><li>Join a research group at IITK for hands-on experience</li><li>Attempt a publication or conference paper</li><li>Identify your research area(s) of interest early</li></ul></div></div>
+        <div class="tl-item"><div class="tl-dot purple"></div><div class="tl-card purple"><div class="tl-timing"><i class="fa fa-clock"></i> ~15 months before</div><h5>Standardised Tests &amp; LOR Relationships</h5><ul><li>Start GRE preparation 3–4 months before test date</li><li>Book TOEFL/IELTS; complete language tests if needed</li><li>Identify 3 faculty who know your research work well</li><li>Engage through courses, projects, or TA roles</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label apply"><i class="fa fa-crosshairs"></i> Phase 2 · Strategy (9–6 months before deadlines)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><h5>Research Universities &amp; Draft Materials</h5><ul><li>Focus on specific research groups, not just rankings</li><li>Create a shortlist of 8–12 universities (reach, match, safe)</li><li>Begin drafting Statement of Purpose for each program</li><li>Highlight IITK research, coursework, and career goals</li><li>Update CV with publications, projects, awards</li></ul></div></div>
+        <div class="tl-item"><div class="tl-dot sky"></div><div class="tl-card sky"><h5>Professor Cold-Emailing (for PhD)</h5><ul><li>Write personalised, research-specific emails to target professors</li><li>Mention a specific paper of theirs and explain how you can contribute</li><li>Attach a brief research proposal and your CV</li><li>Follow up once after 2–3 weeks if no response</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label during"><i class="fa fa-paper-plane"></i> Phase 3 · Submitting Applications (Aug–Jan)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-card green"><div class="tl-timing"><i class="fa fa-clock"></i> Aug–Sep</div><h5>Finalise Materials &amp; Request LORs</h5><ul><li>Request LORs from chosen faculty — give 6 weeks notice</li><li>Get official sealed transcript from IITK academic section (2–4 weeks)</li><li>Compile all standardised test score reports</li></ul></div></div>
+        <div class="tl-item"><div class="tl-dot green"></div><div class="tl-card green"><div class="tl-timing"><i class="fa fa-clock"></i> Oct–Dec</div><h5>Submit Applications &amp; Interviews</h5><ul><li>Complete all university portals before their deadlines</li><li>Pay application fees (USD 50–100 per university typically)</li><li>Apply for scholarships: DAAD, Fulbright-Nehru, Erasmus Mundus</li><li>Prepare for interviews with admissions committees or supervisors</li></ul></div></div>
+      </div>
+
+      <div class="phase-sep"></div>
+      <div class="phase-label after"><i class="fa fa-flag-checkered"></i> Phase 4 · Post Offer (March onwards)</div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-card"><h5>Accept, Visa &amp; Departure</h5><ul><li>Compare funding packages, research group quality, cost of living</li><li>Accept by standard deadline (typically April 15 for US)</li><li>Apply for student visa (F-1 for USA, Tier 4 for UK, etc.)</li><li>Obtain degree certificate and official transcripts from IITK</li><li>Arrange accommodation, insurance, and travel</li></ul></div></div>
+      </div>
+
+      <div style="margin-top:28px">
+        <h4 style="font-family:'Poppins',sans-serif;color:var(--navy);font-size:.93rem;margin-bottom:14px"><i class="fa fa-list-check"></i> Master Checklist for Higher Studies</h4>
+        <ul class="checklist">
+          <li><i class="fa fa-check"></i> GRE/GMAT score ready</li>
+          <li><i class="fa fa-check"></i> TOEFL/IELTS score ready</li>
+          <li><i class="fa fa-check"></i> Official transcript ordered</li>
+          <li><i class="fa fa-check"></i> 3 LOR requests sent</li>
+          <li><i class="fa fa-check"></i> Research CV updated</li>
+          <li><i class="fa fa-check"></i> SoP drafted &amp; reviewed</li>
+          <li><i class="fa fa-check"></i> 10+ universities shortlisted</li>
+          <li><i class="fa fa-check"></i> Professor emails sent (PhD)</li>
+          <li><i class="fa fa-check"></i> Application fees budgeted</li>
+          <li><i class="fa fa-check"></i> Scholarship apps submitted</li>
+          <li><i class="fa fa-check"></i> Acceptance decision made</li>
+          <li><i class="fa fa-check"></i> Visa applied</li>
+        </ul>
+      </div>
+
+      <div class="tip-box green"><i class="fa fa-star"></i><p><strong>IITK Advantage:</strong> Admissions committees at top global universities are well aware of the rigour of IITK programs. Your IIT Kanpur degree carries significant weight — leverage your research experience, faculty connections, and the OIR's alumni network to maximise your application's impact.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<div class="contact-banner">
+  <h3>Need Guidance? The IR Wing &amp; OIR Are Here to Help</h3>
+  <p>Reach out for official policies, document attestation, and program-specific announcements.</p>
+  <div class="contact-grid">
+    <div class="contact-item"><i class="fa fa-envelope"></i> oir@iitk.ac.in</div>
+    <div class="contact-item"><i class="fa fa-phone"></i> +91-512-259-6067</div>
+    <div class="contact-item"><i class="fa fa-location-dot"></i> Faculty Building Annexe, Level 3, IITK</div>
+    <div class="contact-item"><i class="fab fa-instagram"></i> @iitkinternationalrelations</div>
+  </div>
+  <a href="https://www.iitk.ac.in/oir/" target="_blank" class="btn btn-accent"><i class="fa fa-external-link-alt"></i> OIR Official Website</a>
+</div>
+
+</main>
+
+<footer>
+  <p>International Relations Wing · IIT Kanpur &nbsp;|&nbsp; Information sourced from <a href="https://www.iitk.ac.in/oir/" target="_blank">OIR IITK</a> &nbsp;·&nbsp; Contact: <a href="mailto:oir@iitk.ac.in">oir@iitk.ac.in</a></p>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, { threshold: 0.08 });
+document.querySelectorAll('.roadmap-section').forEach(s => io.observe(s));
+
+const hero = document.querySelector('.hero');
+hero.addEventListener('mousemove', (e) => {
+  const x = (e.clientX / window.innerWidth - 0.5) * 8;
+  const y = (e.clientY / window.innerHeight - 0.5) * 8;
+  hero.style.backgroundPosition = `${50 + x}% ${50 + y}%`;
+});
+</script>
+
+</body>
+</html>
